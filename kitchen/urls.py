@@ -1,7 +1,17 @@
 from django.urls import path
 
-from .models import DishType
-from .views import  index, CookListView, CookCreateView
+
+from .views import (index, CookListView, CookCreateView, CookDetailView,
+                    CookDeleteView, CookUpdateView,
+                    YearsOfExperienceUpdateView, DishListView,
+                    DishDetailView, DishCreateView,
+                    DishUpdateView, DishDeleteView,
+                    AssignCookView, RemoveCookView,
+                    DishTypeListView, DishTypeCreateView,
+                    DishTypeUpdateView, DishTypeDeleteView,
+                    IngredientListView, IngredientCreateView,
+                    IngredientUpdateView, IngredientDeleteView)
+
 
 
 urlpatterns = [
