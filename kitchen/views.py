@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from kitchen.models import Cook, Dish, DishType, Ingredient
 
 
-@login_required
+
 def index(request):
     """View function for the home page of the site."""
 
@@ -60,7 +60,7 @@ class CookDeleteView(LoginRequiredMixin, DeleteView):
 
 class YearsOfExperienceUpdateView(LoginRequiredMixin, UpdateView):
     model = Cook
-    form_class = YearsOfExperienceUpdateForm
+    # form_class = YearsOfExperienceUpdateForm
     success_url = reverse_lazy("kitchen:cook-list")
 
 

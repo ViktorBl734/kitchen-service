@@ -61,5 +61,3 @@ urlpatterns = [
          name="ingredient-delete"),
 
 ]
-
-app_name = "kitchen"
