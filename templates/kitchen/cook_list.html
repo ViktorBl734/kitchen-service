@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1 align="center">
+    <b>Cook List</b>
+</h1>
+<div class="create-cook-list">
+<a href="{% url 'cook-create' %}" style="font-size: 1.3em;" class="btn btn-primary">Add new cook</a>
+</div>
+{% if cook_list %}
+<table class="table-cook-list">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Years of Experience</th>
+    </tr>
+    {% for cook in cook_list %}
+    <tr>
+        <td>{{ cook.id }}</td>
+        <td>{{ cook.username }}</td>
+        <td>{{ cook.first_name }}</td>
+        <td>{{ cook.last_name }}</td>
+        <td>{{ cook.years_of_experience }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+      <p class="no-cooks-cook-list">There are no cooks in the service:(</p>
+    {% endif %}
+{% endblock %}

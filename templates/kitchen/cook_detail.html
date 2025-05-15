@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="title-index">
+    <h1>COOK INFO</h1>
+</div>
+<table class="table-index">
+    <tr><td><strong>First name: </strong> {{ cook.first_name }}</td></tr>
+    <tr><td><strong>Last name: </strong> {{ cook.last_name }}</td></tr>
+    <tr><td><strong>Years of experience: </strong> {{ cook.years_of_experience }}</td></tr>
+    <tr><td><strong>is staff: </strong> {{ cook.is_staff }}</td></tr>
+</table>
+
+<div>
+    <h4>DISHES</h4>
+    {% for dish in cook.dishes.all %}
+    <hr>
+    <p> <strong> name:</strong> {{dish.name }}</p>
+    <p> <strong> type:</strong> {{dish.type }}</p>
+    {% empty %}
+    <p>No dishes yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -81,6 +81,16 @@ nav a:hover {
     flex-wrap: wrap;
 }
 
+.create-cook-list {
+    text-align: right;
+    margin: 20px;
+    padding: 10px;
+}
+.no-cooks-cook-list {
+    margin: 15px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
 footer {
     background-color:grey;
     color: #333;
