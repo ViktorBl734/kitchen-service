@@ -24,6 +24,9 @@ class Dish(models.Model):
     type = models.ForeignKey("DishType", on_delete=models.CASCADE)
     cooks = models.ManyToManyField(Cook, related_name="dishes")
 
+    def get_absolute_url(self):
+        return reverse("dish-detail", kwargs={"pk": self.pk})
+
     def __str__(self):
         return self.name
 
@@ -37,7 +40,7 @@ class DishType(models.Model):
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=250)
-    dishes = models.ManyToManyField(Dish, related_name="ingredients")
+    dishes = models.ManyToManyField(Dish, related_name="ingredients", blank=True)
 
     def __str__(self):
         return self.name

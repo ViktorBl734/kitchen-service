@@ -7,12 +7,25 @@
 <div class="create-cook-list">
 <a href="{% url 'ingredient-create' %}" style="font-size: 1.3em;" class="btn btn-primary">Add new ingredient</a>
 </div>
-<div align="center">
+{% if ingredient_list %}
+<table class="table-cook-list">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
     {% for ingredient in ingredient_list %}
-    <p><i> {{ ingredient.name }}</i></p>
-    {% empty %}
-    <p><b>No ingredients found:(</b></p>
+    <tr>
+        <td>{{ingredient.id}}</td>
+        <td>{{ingredient.name}}</td>
+        <td><a href="{% url 'ingredient-update' pk=ingredient.id %}">Update</a></td>
+        <td><a href="{% url 'ingredient-delete' pk=ingredient.id %}">Delete</a></td>
+    </tr>
     {% endfor %}
-</div>
+</table>
+{% else %}
+<p class="no-cooks-cook-list">There are no ingredients in the service:(</p>
+{% endif %}
 
 {% endblock %}

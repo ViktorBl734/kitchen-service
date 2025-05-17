@@ -12,17 +12,22 @@
 <table class="table-cook-list">
     <tr>
         <th>ID</th>
+        <th>Name</th>
         <th>Description</th>
         <th>Price</th>
         <th>Type</th>
         <th>Ingredients</th>
+        <th>Update</th>
+        <th>Delete</th>
     </tr>
     {% for dish in dish_list %}
     <tr>
         <td>{{ dish.id }}</td>
-        <td>{{ dish.name }}</td>
+        <td><a href="{{ dish.get_absolute_url }}">{{ dish.name }}</a></td>
+        <td>{{ dish.description }}</td>
         <td>{{ dish.price }}</td>
         <td>{{ dish.type.name }}</td>
+
 
         <td>
             {% for ingredient in dish.ingredients.all %}
@@ -30,6 +35,8 @@
             <em>No ingredients</em>
             {% endfor %}
         </td>
+        <td><a href="{% url 'dish-update' pk=dish.id %}">Update</a></td>
+        <td><a href="{% url 'dish-delete' pk=dish.id %}">Delete</a></td>
     </tr>
     {% endfor %}
 </table>

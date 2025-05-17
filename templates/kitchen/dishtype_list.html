@@ -7,12 +7,24 @@
 <div class="create-cook-list">
 <a href="{% url 'dishtype-create' %}" style="font-size: 1.3em;" class="btn btn-primary">Add new dishtype</a>
 </div>
-<div align="center">
-    {% for dishtype in dish_types_list %}
-    <p><i> {{ dishtype.name }}</i></p>
-    {% empty %}
-    <p><b>No dish types found :(</b></p>
+{% if dishtype_list %}
+<table class="table-cook-list">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    {% for dishtype in dishtype_list %}
+    <tr>
+        <td>{{dishtype.id}}</td>
+        <td>{{dishtype.name}}</td>
+        <td><a href="{% url 'dishtype-update' pk=dishtype.id %}">Update</a></td>
+        <td><a href="{% url 'dishtype-delete' pk=dishtype.id %}">Delete</a></td>
+    </tr>
     {% endfor %}
-</div>
-
+</table>
+{% else %}
+<p class="no-cooks-cook-list">There are no dishes in the service:(</p>
+{% endif %}
 {% endblock %}

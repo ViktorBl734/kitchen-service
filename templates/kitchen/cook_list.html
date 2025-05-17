@@ -16,14 +16,18 @@
         <th>First name</th>
         <th>Last name</th>
         <th>Years of Experience</th>
+        <th>Update</th>
+        <th>Delete</th>
     </tr>
     {% for cook in cook_list %}
     <tr>
         <td>{{ cook.id }}</td>
-        <td>{{ cook.username }}</td>
+        <td><a href="{{ cook.get_absolute_url }}">{{ cook.username }} {% if user == cook %} (Me){% endif %}</a></td>
         <td>{{ cook.first_name }}</td>
         <td>{{ cook.last_name }}</td>
         <td>{{ cook.years_of_experience }}</td>
+        <td><a href="{% url 'cook-update' pk=cook.id %}">Update</a></td>
+        <td><a href="{% url 'cook-delete' pk=cook.id %}">Delete</a></td>
     </tr>
     {% endfor %}
 </table>

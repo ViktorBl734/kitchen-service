@@ -139,7 +139,7 @@ class DishTypeDeleteView(LoginRequiredMixin, DeleteView):
 class IngredientListView(LoginRequiredMixin, ListView):
     model = Ingredient
     paginate_by = 4
-    queryset = Ingredient.objects.all().prefetch_related("cooks")
+    queryset = Ingredient.objects.all().prefetch_related("dishes")
 
 
 class IngredientCreateView(LoginRequiredMixin, CreateView):
