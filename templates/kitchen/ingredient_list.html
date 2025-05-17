@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 align="center">
+    <b>Ingredients</b>
+</h1>
+<div class="create-cook-list">
+<a href="{% url 'ingredient-create' %}" style="font-size: 1.3em;" class="btn btn-primary">Add new ingredient</a>
+</div>
+<div align="center">
+    {% for ingredient in ingredient_list %}
+    <p><i> {{ ingredient.name }}</i></p>
+    {% empty %}
+    <p><b>No ingredients found:(</b></p>
+    {% endfor %}
+</div>
+
+{% endblock %}

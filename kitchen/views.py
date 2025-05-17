@@ -31,7 +31,7 @@ def index(request):
     return render(request, "kitchen/index.html", context=context)
 
 
-class CookListView(ListView):
+class CookListView(LoginRequiredMixin, ListView):
     model = Cook
     paginate_by = 4
 
@@ -44,24 +44,24 @@ class CookDetailView(LoginRequiredMixin, DetailView):
 class CookCreateView(LoginRequiredMixin, CreateView):
     model = Cook
     fields = ["username", "first_name", "last_name", "years_of_experience"]
-    success_url = reverse_lazy("kitchen:cook-list")
+    success_url = reverse_lazy("cook-list")
 
 
 class CookUpdateView(LoginRequiredMixin, UpdateView):
     model = Cook
     fields = "__all__"
-    success_url = reverse_lazy("kitchen:cook-list")
+    success_url = reverse_lazy("cook-list")
 
 
 class CookDeleteView(LoginRequiredMixin, DeleteView):
     model = Cook
-    success_url = reverse_lazy("kitchen:cook-list")
+    success_url = reverse_lazy("cook-list")
 
 
 class YearsOfExperienceUpdateView(LoginRequiredMixin, UpdateView):
     model = Cook
     # form_class = YearsOfExperienceUpdateForm
-    success_url = reverse_lazy("kitchen:cook-list")
+    success_url = reverse_lazy("cook-list")
 
 
 class AssignCookView(LoginRequiredMixin, View):
@@ -69,7 +69,7 @@ class AssignCookView(LoginRequiredMixin, View):
         dish = get_object_or_404(Dish, pk=pk)
         dish.cooks.add(request.user)
         dish.save()
-        return redirect("kitchen:dish-detail", pk=dish.pk)
+        return redirect("dish-detail", pk=dish.pk)
 
 
 class RemoveCookView(LoginRequiredMixin, View):
@@ -77,13 +77,13 @@ class RemoveCookView(LoginRequiredMixin, View):
         dish = get_object_or_404(Dish, pk=pk)
         dish.cooks.remove(request.user)
         dish.save()
-        return redirect("kitchen:dish-detail", pk=dish.pk)
+        return redirect("dish-detail", pk=dish.pk)
 
 
 class DishListView(LoginRequiredMixin, ListView):
     model = Dish
     paginate_by = 4
-    queryset = Dish.objects.all().select_related("dishtype")
+    queryset = Dish.objects.all().select_related("type")
 
 
 class DishDetailView(LoginRequiredMixin, DetailView):
@@ -100,18 +100,18 @@ class DishDetailView(LoginRequiredMixin, DetailView):
 class DishCreateView(LoginRequiredMixin, CreateView):
     model = Dish
     fields = "__all__"
-    success_url = reverse_lazy("kitchen:dish-list")
+    success_url = reverse_lazy("dish-list")
 
 
 class DishUpdateView(LoginRequiredMixin, UpdateView):
     model = Dish
     fields = "__all__"
-    success_url = reverse_lazy("kitchen:dish-list")
+    success_url = reverse_lazy("dish-list")
 
 
 class DishDeleteView(LoginRequiredMixin, DeleteView):
     model = Dish
-    success_url = reverse_lazy("kitchen:dish-list")
+    success_url = reverse_lazy("dish-list")
 
 
 class DishTypeListView(LoginRequiredMixin, ListView):
@@ -122,18 +122,18 @@ class DishTypeListView(LoginRequiredMixin, ListView):
 class DishTypeCreateView(LoginRequiredMixin, CreateView):
     model = DishType
     fields = "__all__"
-    success_url = reverse_lazy("kitchen:dishtype-list")
+    success_url = reverse_lazy("dishtype-list")
 
 
 class DishTypeUpdateView(LoginRequiredMixin, UpdateView):
     model = DishType
     fields = "__all__"
-    success_url = reverse_lazy("kitchen:dishtype-list")
+    success_url = reverse_lazy("dishtype-list")
 
 
 class DishTypeDeleteView(LoginRequiredMixin, DeleteView):
     model = DishType
-    success_url = reverse_lazy("kitchen:dishtype-list")
+    success_url = reverse_lazy("dishtype-list")
 
 
 class IngredientListView(LoginRequiredMixin, ListView):
@@ -145,15 +145,15 @@ class IngredientListView(LoginRequiredMixin, ListView):
 class IngredientCreateView(LoginRequiredMixin, CreateView):
     model = Ingredient
     fields = "__all__"
-    success_url = reverse_lazy("kitchen:ingredient-list")
+    success_url = reverse_lazy("ingredient-list")
 
 
 class IngredientUpdateView(LoginRequiredMixin, UpdateView):
     model = Ingredient
     fields = "__all__"
-    success_url = reverse_lazy("kitchen:ingredient-list")
+    success_url = reverse_lazy("ingredient-list")
 
 
 class IngredientDeleteView(LoginRequiredMixin, DeleteView):
     model = Ingredient
-    success_url = reverse_lazy("kitchen:ingredient-list")
+    success_url = reverse_lazy("ingredient-list")

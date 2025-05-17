@@ -1,5 +1,5 @@
 from django.urls import path
-
+from django.contrib.auth import views as auth_views
 
 from .views import (index, CookListView, CookCreateView, CookDetailView,
                     CookDeleteView, CookUpdateView,
@@ -15,6 +15,8 @@ from .views import (index, CookListView, CookCreateView, CookDetailView,
 
 
 urlpatterns = [
+    path('login/', auth_views.LoginView.as_view(), name="login"),
+    path('logout/', auth_views.LogoutView.as_view(), name="logout"),
     path("", index, name="index"),
     path("cooks/", CookListView.as_view(), name="cook-list"),
     path("cooks/create/", CookCreateView.as_view(), name="cook-create"),
