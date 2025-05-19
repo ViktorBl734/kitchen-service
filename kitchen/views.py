@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -61,8 +61,9 @@ class CookDeleteView(LoginRequiredMixin, DeleteView):
 
 class YearsOfExperienceUpdateView(LoginRequiredMixin, UpdateView):
     model = Cook
-    # form_class = YearsOfExperienceUpdateForm
-    success_url = reverse_lazy("cook-list")
+    fields = ("years_of_experience",)
+    def get_success_url(self):
+        return reverse("cook-detail", kwargs={"pk": self.object.pk})
 
 
 class AssignCookView(LoginRequiredMixin, View):
