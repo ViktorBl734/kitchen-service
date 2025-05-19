@@ -2,36 +2,66 @@
 {% load static %}
 
 {% block content %}
-<h1 align="center">
+<div style="background-color: #add8e6; min-height: 100vh; padding: 40px 20px; font-family: Arial, sans-serif; overflow-x: hidden;">
+
+  <h1 style="text-align: center; color: #4d4d4d; margin-bottom: 30px;">
     <b>Cook List</b>
-</h1>
-<div class="create-cook-list">
-<a href="{% url 'cook-create' %}" style="font-size: 1.3em;" class="btn btn-primary">Add new cook</a>
-</div>
-{% if cook_list %}
-<table class="table-cook-list">
-    <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Years of Experience</th>
-        <th>Update</th>
-        <th>Delete</th>
+  </h1>
+
+  <div style="text-align: right; margin-bottom: 40px; margin-right: 38px;">
+    <a href="{% url 'cook-create' %}" class="btn btn-primary"
+       style="font-size: 1.4em; padding: 12px 24px; margin-top: 10px;">
+      Add new cook
+    </a>
+  </div>
+
+  {% if cook_list %}
+  <table style="
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #e6f7ff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 95%;
+      font-size: 1.5em;
+      text-align: center;
+    ">
+    <tr style="background-color: #b0d4e3;">
+      <th style="padding: 14px;">ID</th>
+      <th style="padding: 14px;">Username</th>
+      <th style="padding: 14px;">First name</th>
+      <th style="padding: 14px;">Last name</th>
+      <th style="padding: 14px;">Years of Experience</th>
+      <th style="padding: 14px;">Update</th>
+      <th style="padding: 14px;">Delete</th>
     </tr>
     {% for cook in cook_list %}
-    <tr>
-        <td>{{ cook.id }}</td>
-        <td><a href="{{ cook.get_absolute_url }}">{{ cook.username }} {% if user == cook %} (Me){% endif %}</a></td>
-        <td>{{ cook.first_name }}</td>
-        <td>{{ cook.last_name }}</td>
-        <td>{{ cook.years_of_experience }}</td>
-        <td><a href="{% url 'cook-update' pk=cook.id %}">Update</a></td>
-        <td><a href="{% url 'cook-delete' pk=cook.id %}">Delete</a></td>
+    <tr style="border-top: 1px solid #ccc;">
+      <td style="padding: 12px;">{{ cook.id }}</td>
+      <td style="padding: 12px;">
+        <a href="{{ cook.get_absolute_url }}">
+          {{ cook.username }}{% if user == cook %} <span style="color: green;">(Me)</span>{% endif %}
+        </a>
+      </td>
+      <td style="padding: 12px;">{{ cook.first_name }}</td>
+      <td style="padding: 12px;">{{ cook.last_name }}</td>
+      <td style="padding: 12px;">{{ cook.years_of_experience }}</td>
+      <td style="padding: 12px;">
+        <a href="{% url 'cook-update' pk=cook.id %}">Update</a>
+      </td>
+      <td style="padding: 12px;">
+        <a href="{% url 'cook-delete' pk=cook.id %}">Delete</a>
+      </td>
     </tr>
     {% endfor %}
-</table>
-{% else %}
-      <p class="no-cooks-cook-list">There are no cooks in the service:(</p>
-    {% endif %}
+  </table>
+
+  {% else %}
+    <p style="text-align: center; color: #333; font-size: 1.4em;">
+      There are no cooks in the service 😞
+    </p>
+  {% endif %}
+
+</div>
 {% endblock %}

@@ -11,8 +11,19 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000;
+
 }
 
+.navbar {
+    justify-content: center;
+}
+.nav-right {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 nav a {
     color: white;
     margin-right: 30px;
@@ -23,6 +34,11 @@ nav a {
 
 nav a:hover {
     text-decoration: underline;
+}
+
+.user-link {
+  font-weight: bold;
+  color: lightcoral;
 }
 
 .main-index {
