@@ -6,6 +6,7 @@ from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from kitchen.forms import DishNameSearchForm
 from kitchen.models import Cook, Dish, DishType, Ingredient
 
 
@@ -86,6 +87,20 @@ class DishListView(LoginRequiredMixin, ListView):
     model = Dish
     paginate_by = 4
     queryset = Dish.objects.all().select_related("type")
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(DishListView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name", "")
+        context["search_form"] = DishNameSearchForm(
+            initial={"name": name},
+        )
+        return context
+
+    def get_queryset(self):
+        name = self.request.GET.get("name")
+        if name:
+            return Dish.objects.filter(name__icontains=name)
+        return self.queryset
 
 
 class DishDetailView(LoginRequiredMixin, DetailView):
