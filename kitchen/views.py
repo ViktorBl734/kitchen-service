@@ -1,12 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms import forms
+from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from kitchen.forms import DishNameSearchForm
+from kitchen.forms import DishNameSearchForm, DishForm, IngredientForm
 from kitchen.models import Cook, Dish, DishType, Ingredient
 
 
@@ -51,7 +53,7 @@ class CookCreateView(LoginRequiredMixin, CreateView):
 
 class CookUpdateView(LoginRequiredMixin, UpdateView):
     model = Cook
-    fields = "__all__"
+    fields = ("username", "first_name", "last_name", "years_of_experience",)
     success_url = reverse_lazy("cook-list")
 
 
@@ -116,7 +118,7 @@ class DishDetailView(LoginRequiredMixin, DetailView):
 
 class DishCreateView(LoginRequiredMixin, CreateView):
     model = Dish
-    fields = "__all__"
+    form_class = DishForm
     success_url = reverse_lazy("dish-list")
 
 
@@ -161,7 +163,7 @@ class IngredientListView(LoginRequiredMixin, ListView):
 
 class IngredientCreateView(LoginRequiredMixin, CreateView):
     model = Ingredient
-    fields = "__all__"
+    form_class = IngredientForm
     success_url = reverse_lazy("ingredient-list")
 
 
