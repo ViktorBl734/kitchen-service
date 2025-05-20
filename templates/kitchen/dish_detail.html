@@ -2,18 +2,18 @@
 {% load static %}
 
 {% block content %}
-<div class="title-index">
+<div class="title-index" style="margin:75px 0px 0px 0px;">
     <h1>DISH INFO</h1>
 </div>
-
+<div style="margin:30px 30px 15px 30px;">
 <table class="table-index">
     <tr><td><strong>name: </strong> {{ dish.name }}</td></tr>
     <tr><td><strong>description: </strong> {{ dish.description }}</td></tr>
     <tr><td><strong>price: </strong> {{ dish.price }}</td></tr>
     <tr><td><strong>type: </strong> {{ dish.type }}</td></tr>
 </table>
-
-<div>
+</div>
+<div style="margin:0px 30px 20px 37px;">
     {% if dish in user.dishes.all %}
     <a href="{% url 'toggle-dish-assign' pk=dish.id %}" class="btn btn-danger link-to-page">
     Remove me as the cook
@@ -24,13 +24,13 @@
     </a>
     {% endif %}
 </div>
-<div>
+<div style="margin:0px 30px 0px 38px; font-size: 1.4em;">
     <h4>COOKS:</h4>
     {% for cook in dish.cooks.all %}
-    <hr>
-    <p> <strong> {{cook.first_name}} {{cook.last_name}}</strong>  </p>
+    <strong> {{cook.first_name}} {{cook.last_name}} {% if not forloop.last %}, {% endif %} </strong>
     {% empty %}
     <p>No cooks</p>
     {% endfor %}
+    <hr>
 </div>
 {% endblock %}

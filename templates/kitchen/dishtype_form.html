@@ -2,11 +2,43 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>{{ object|yesno:"Update,Create" }} dish type</h1>
-  <form action="" method="post" novalidate>
-    {% csrf_token %}
-    {{ form|crispy }}
+<div style="background-color: #add8e6; padding: 40px 20px; font-family: Arial, sans-serif; overflow-x: hidden; margin-top: 60px;">
 
-    <input type="submit" value="Submit" class="btn btn-primary">
-  </form>
+  <h1 style="text-align: center; color: #4d4d4d; margin-bottom: 30px;">
+    <b>{{ object|yesno:"Update,Create" }} Dish Type</b>
+  </h1>
+
+  <div style="
+      margin: 0 auto;
+      background-color: #e6f7ff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 60%;
+      padding: 30px;
+      font-size: 1.2em;
+    ">
+    <form action="" method="post" novalidate>
+      {% csrf_token %}
+      {{ form|crispy }}
+
+      <div style="text-align: center; margin-top: 30px;">
+        <input type="submit" value="Submit"
+               style="
+                 font-size: 1.3em;
+                 padding: 10px 25px;
+                 background-color: #4CAF50;
+                 color: white;
+                 border: none;
+                 border-radius: 5px;
+                 cursor: pointer;
+                 transition: background-color 0.3s;
+               "
+               onmouseover="this.style.backgroundColor='#45a049'"
+               onmouseout="this.style.backgroundColor='#4CAF50'">
+      </div>
+    </form>
+  </div>
+
+</div>
 {% endblock %}

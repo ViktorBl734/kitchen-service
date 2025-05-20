@@ -1,30 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 align="center">
-    <b>DishTypes</b>
-</h1>
-<div class="create-cook-list">
-<a href="{% url 'dishtype-create' %}" style="font-size: 1.3em;" class="btn btn-primary">Add new dishtype</a>
-</div>
-{% if dishtype_list %}
-<table class="table-cook-list">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Update</th>
-        <th>Delete</th>
+<div style="background-color: #add8e6; padding: 40px 20px; font-family: Arial, sans-serif; overflow-x: hidden; margin-top: 60px;">
+
+  <h1 style="text-align: center; color: #4d4d4d; margin-bottom: 30px;">
+    <b>Dish Types</b>
+  </h1>
+
+  <div style="text-align: right; margin-bottom: 40px; margin-right: 38px;">
+    <a href="{% url 'dishtype-create' %}" class="btn btn-primary"
+       style="font-size: 1.4em; padding: 12px 24px;">
+      Add new dishtype
+    </a>
+  </div>
+
+  {% if dishtype_list %}
+  <table style="
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #e6f7ff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 60%;
+      font-size: 1.5em;
+      text-align: center;
+    ">
+    <tr style="background-color: #b0d4e3;">
+      <th style="padding: 14px;">ID</th>
+      <th style="padding: 14px;">Name</th>
+      <th style="padding: 14px;">Update</th>
+      <th style="padding: 14px;">Delete</th>
     </tr>
     {% for dishtype in dishtype_list %}
-    <tr>
-        <td>{{dishtype.id}}</td>
-        <td>{{dishtype.name}}</td>
-        <td><a href="{% url 'dishtype-update' pk=dishtype.id %}">Update</a></td>
-        <td><a href="{% url 'dishtype-delete' pk=dishtype.id %}">Delete</a></td>
+    <tr style="border-top: 1px solid #ccc;">
+      <td style="padding: 12px;">{{ dishtype.id }}</td>
+      <td style="padding: 12px;">{{ dishtype.name }}</td>
+      <td style="padding: 12px;">
+        <a href="{% url 'dishtype-update' pk=dishtype.id %}">Update</a>
+      </td>
+      <td style="padding: 12px;">
+        <a href="{% url 'dishtype-delete' pk=dishtype.id %}">Delete</a>
+      </td>
     </tr>
     {% endfor %}
-</table>
-{% else %}
-<p class="no-cooks-cook-list">There are no dishes in the service:(</p>
-{% endif %}
+  </table>
+  {% else %}
+    <p style="text-align: center; color: #333; font-size: 1.4em;">
+      There are no dish types in the service 😞
+    </p>
+  {% endif %}
+
+</div>
 {% endblock %}

@@ -1,31 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 align="center">
+<div style="background-color: #add8e6; padding: 40px 20px; font-family: Arial, sans-serif; overflow-x: hidden; margin-top: 60px;">
+
+  <h1 style="text-align: center; color: #4d4d4d; margin-bottom: 30px;">
     <b>Ingredients</b>
-</h1>
-<div class="create-cook-list">
-<a href="{% url 'ingredient-create' %}" style="font-size: 1.3em;" class="btn btn-primary">Add new ingredient</a>
-</div>
-{% if ingredient_list %}
-<table class="table-cook-list">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Update</th>
-        <th>Delete</th>
+  </h1>
+
+  <div style="text-align: right; margin-bottom: 40px; margin-right: 38px;">
+    <a href="{% url 'ingredient-create' %}" class="btn btn-primary"
+       style="font-size: 1.4em; padding: 12px 24px;">
+      Add new ingredient
+    </a>
+  </div>
+
+  {% if ingredient_list %}
+  <table style="
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #e6f7ff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 60%;
+      font-size: 1.5em;
+      text-align: center;
+    ">
+    <tr style="background-color: #b0d4e3;">
+      <th style="padding: 14px;">ID</th>
+      <th style="padding: 14px;">Name</th>
+      <th style="padding: 14px;">Update</th>
+      <th style="padding: 14px;">Delete</th>
     </tr>
     {% for ingredient in ingredient_list %}
-    <tr>
-        <td>{{ingredient.id}}</td>
-        <td>{{ingredient.name}}</td>
-        <td><a href="{% url 'ingredient-update' pk=ingredient.id %}">Update</a></td>
-        <td><a href="{% url 'ingredient-delete' pk=ingredient.id %}">Delete</a></td>
+    <tr style="border-top: 1px solid #ccc;">
+      <td style="padding: 12px;">{{ ingredient.id }}</td>
+      <td style="padding: 12px;">{{ ingredient.name }}</td>
+      <td style="padding: 12px;">
+        <a href="{% url 'ingredient-update' pk=ingredient.id %}">Update</a>
+      </td>
+      <td style="padding: 12px;">
+        <a href="{% url 'ingredient-delete' pk=ingredient.id %}">Delete</a>
+      </td>
     </tr>
     {% endfor %}
-</table>
-{% else %}
-<p class="no-cooks-cook-list">There are no ingredients in the service:(</p>
-{% endif %}
+  </table>
+  {% else %}
+    <p style="text-align: center; color: #333; font-size: 1.4em;">
+      There are no ingredients in the service 😞
+    </p>
+  {% endif %}
 
+</div>
 {% endblock %}
