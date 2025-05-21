@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
-from .views import (index, CookListView, CookCreateView, CookDetailView,
+from .views import (CookListView, CookCreateView, CookDetailView,
                     CookDeleteView, CookUpdateView,
                     YearsOfExperienceUpdateView, DishListView,
                     DishDetailView, DishCreateView,
@@ -11,7 +11,7 @@ from .views import (index, CookListView, CookCreateView, CookDetailView,
                     DishTypeUpdateView, DishTypeDeleteView,
                     IngredientListView, IngredientCreateView,
                     IngredientUpdateView, IngredientDeleteView,
-                    toggle_assign_to_dish,
+                    ToggleAssignToDishView, IndexView,
                     )
 
 
@@ -19,7 +19,7 @@ from .views import (index, CookListView, CookCreateView, CookDetailView,
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(), name="login"),
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),
-    path("", index, name="index"),
+    path("", IndexView.as_view(), name="index"),
     path("cooks/", CookListView.as_view(), name="cook-list"),
     path("cooks/create/", CookCreateView.as_view(), name="cook-create"),
     path("cooks/<int:pk>/", CookDetailView.as_view(), name="cook-detail"),
@@ -48,7 +48,7 @@ urlpatterns = [
     path("dishes/<int:pk>/remowe_cook/",
          RemoveCookView.as_view(), name="remove_cook"),
     path("dishes/<int:pk>/toggle-assign/",
-         toggle_assign_to_dish,
+         ToggleAssignToDishView.as_view(),
          name="toggle-dish-assign",
          ),
     path("dishtypes/", DishTypeListView.as_view(),
