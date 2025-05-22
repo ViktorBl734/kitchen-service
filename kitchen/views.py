@@ -124,7 +124,7 @@ class DishCreateView(LoginRequiredMixin, CreateView):
 
 class DishUpdateView(LoginRequiredMixin, UpdateView):
     model = Dish
-    fields = "__all__"
+    form_class = DishForm
     success_url = reverse_lazy("dish-list")
 
 
@@ -169,7 +169,7 @@ class IngredientCreateView(LoginRequiredMixin, CreateView):
 
 class IngredientUpdateView(LoginRequiredMixin, UpdateView):
     model = Ingredient
-    fields = "__all__"
+    form_class = IngredientForm
     success_url = reverse_lazy("ingredient-list")
 
 
