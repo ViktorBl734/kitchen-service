@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block content %}
+<div style="background-color: #add8e6; padding: 40px 20px; font-family: Arial, sans-serif; overflow-x: hidden; margin-top: 60px;">
+
+  <h1 style="text-align: center; color: #4d4d4d; margin-bottom: 30px;">
+    <b>Dish List</b>
+  </h1>
+
+  <form method="get" action="" class="form-inline"
+      style="display: flex; align-items: center; justify-content: center; gap: 10px; max-width: 900px; margin: 0 auto 30px auto;">
+  {{ search_form|crispy }}
+  <input class="btn btn-primary" type="submit" value="🔍" style="height: 38px;">
+</form>
+
+
+  <div style="text-align: right; margin-bottom: 40px; margin-right: 38px;">
+    <a href="{% url 'dish-create' %}" class="btn btn-primary"
+       style="font-size: 1.4em; padding: 12px 24px; margin-top: 10px;">
+      Add new dish
+    </a>
+  </div>
+
+  {% if dish_list %}
+  <table style="
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #e6f7ff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 95%;
+      font-size: 1.5em;
+      text-align: center;
+    ">
+    <tr style="background-color: #b0d4e3;">
+      <th style="padding: 14px;">ID</th>
+      <th style="padding: 14px;">Name</th>
+      <th style="padding: 14px;">Description</th>
+      <th style="padding: 14px;">Price</th>
+      <th style="padding: 14px;">Type</th>
+      <th style="padding: 14px;">Ingredients</th>
+      <th style="padding: 14px;">Update</th>
+      <th style="padding: 14px;">Delete</th>
+    </tr>
+    {% for dish in dish_list %}
+    <tr style="border-top: 1px solid #ccc;">
+      <td style="padding: 12px;">{{ dish.id }}</td>
+      <td style="padding: 12px;"><a href="{{ dish.get_absolute_url }}">{{ dish.name }}</a></td>
+      <td style="padding: 12px;">{{ dish.description }}</td>
+      <td style="padding: 12px;">{{ dish.price }}</td>
+      <td style="padding: 12px;">{{ dish.type.name }}</td>
+      <td style="padding: 12px;">
+        {% for ingredient in dish.ingredients.all %}
+          {{ ingredient.name }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+          <em>No ingredients</em>
+        {% endfor %}
+      </td>
+      <td style="padding: 12px;"><a href="{% url 'dish-update' pk=dish.id %}">Update</a></td>
+      <td style="padding: 12px;"><a href="{% url 'dish-delete' pk=dish.id %}">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+    <p style="text-align: center; color: #333; font-size: 1.4em;">
+      There are no dishes in the service :(
+    </p>
+  {% endif %}
+
+</div>
+{% endblock %}

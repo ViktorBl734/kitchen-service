@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="background-color: #add8e6; padding: 40px 20px; font-family: Arial, sans-serif; overflow-x: hidden; margin-top: 60px; text-align: center;">
+
+  <div style="
+      margin: 0 auto;
+      background-color: #e6f7ff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 60%;
+      max-width: 500px;
+      padding: 30px;
+      font-size: 1.2em;
+    ">
+    <p style="font-size: 1.3em; margin-bottom: 20px;">You have been successfully logged out.</p>
+
+    <a href="{% url 'login' %}"
+       style="
+         font-size: 1.2em;
+         padding: 10px 25px;
+         background-color: #4CAF50;
+         color: white;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+         text-decoration: none;
+         display: inline-block;
+         transition: background-color 0.3s;
+       "
+       onmouseover="this.style.backgroundColor='#45a049'"
+       onmouseout="this.style.backgroundColor='#4CAF50'">
+      Login again
+    </a>
+  </div>
+
+</div>
+{% endblock %}

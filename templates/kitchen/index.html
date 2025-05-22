@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main class="main-index">
+
+    <div class="title-index">
+        <h1>WELCOME TO KITCHEN SERVICE!</h1>
+        <h5>You have visited this page: {{ num_visits }} time{{ num_visits|pluralize }}. </h5>
+    </div>
+    <div class="index-overview">
+    <table class="table-index">
+        <tr><td>The Kitchen service has</td></tr>
+        <tr><td>the following record counts:</td></tr>
+        <tr><td>Cooks:&nbsp; {{ num_cooks }} </td></tr>
+        <tr><td>Dishes:&nbsp; {{num_dishes}}</td></tr>
+        <tr><td>DishTypes:&nbsp;{{num_dishtypes}} </td></tr>
+        <tr><td>Ingredients:&nbsp;{{num_ingredients}} </td></tr>
+    </table>
+    <div class="title-image">
+        <img src="{% static 'index-kitchen.jpg' %}" alt="Kitchen Image">
+    </div>
+    </div>
+    <div class="text-index">
+        <p>&emsp;&emsp;This site was designed to optimize restaurant kitchen operations.
+It enables chefs to create and categorize dishes, and assign responsible cooks for each one.</p>
+
+<p>&emsp;&emsp;If you're a restaurant owner aiming to improve teamwork and streamline your kitchen workflow, this system is made for you.
+It brings structure, accountability, and efficiency to your culinary team!</p>
+    </div>
+</main>
+{% endblock %}
