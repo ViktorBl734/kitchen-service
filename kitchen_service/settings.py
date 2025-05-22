@@ -20,7 +20,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-!t8$8_+$sh$&ia_am!d@xq-$iv^n#67rw$*7*v4sr+lo6gwpi-")
 if not SECRET_KEY:
     raise Exception("DJANGO_SECRET_KEY environment variable is not set!")
 
@@ -29,12 +29,12 @@ if not SECRET_KEY:
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!t8$8_+$sh$&ia_am!d@xq-$iv^n#67rw$*7*v4sr+lo6gwpi-'
+# SECRET_KEY = 'django-insecure-!t8$8_+$sh$&ia_am!d@xq-$iv^n#67rw$*7*v4sr+lo6gwpi-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # Application definition
