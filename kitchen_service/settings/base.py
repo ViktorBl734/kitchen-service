@@ -15,12 +15,12 @@ import os
 from dotenv import load_dotenv
 
 
-load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+load_dotenv(BASE_DIR / '.env')
 
-
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-!t8$8_+$sh$&ia_am!d@xq-$iv^n#67rw$*7*v4sr+lo6gwpi-")
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 if not SECRET_KEY:
     raise Exception("DJANGO_SECRET_KEY environment variable is not set!")
 
@@ -32,10 +32,6 @@ if not SECRET_KEY:
 # SECRET_KEY = 'django-insecure-!t8$8_+$sh$&ia_am!d@xq-$iv^n#67rw$*7*v4sr+lo6gwpi-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ["127.0.0.1"]
-
 
 # Application definition
 
@@ -53,6 +49,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -83,13 +80,6 @@ WSGI_APPLICATION = 'kitchen_service.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
