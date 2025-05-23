@@ -16,7 +16,7 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-
+STATIC_ROOT = "staticfiles/"
 DATABASES = {
  'default': {
    'ENGINE': 'django.db.backends.postgresql',
